@@ -1,0 +1,140 @@
+.container {
+
+	text-align: center;
+	margin: 0px auto;
+
+}
+
+.search,
+.mixes,
+.stage {
+
+	width: 100%;
+	text-align: center;
+}
+
+.search {
+
+	display: inline-block;
+	margin: 0px auto;
+	margin-top: 100px;
+}
+
+
+#input-song {
+
+	display: inline;
+	width: 50%;
+
+	@media only screen
+		and (min-width : 1224px) {
+
+		width: 50%;
+	}
+
+}
+
+
+.mixes {
+
+	margin-top: 30px;
+	min-height: 220px;
+	border-bottom: 1px solid;
+}
+
+.stage {
+
+	padding: 25px;
+}
+
+#slider {
+
+	width: 100%;
+	margin: 0px auto;
+	display: block;
+}
+
+.mix {
+
+	display: inline-block;
+
+	width: 30%;
+	margin: 10px;
+
+	border: 1px solid black;
+	border-radius: 10px;
+
+	text-align: center;
+
+	@media only screen and (min-width: 700px) {
+
+		width: 30%;
+	}
+}
+
+.mix-result {
+
+	margin-left: -10em;
+	opacity: 0;
+}
+
+.mix-result p {
+
+
+	width: 150%;
+}
+
+.mix-button, .mix-info {
+
+	display: inline-block;
+	/*float: left;*/
+
+	margin: 5px;
+	padding: 5px;
+
+}
+
+.mix-seek {
+
+	margin-top: 50px;
+
+	height: 5px;
+	background-color: black;
+}
+
+.mix-record {
+
+	clear: both;
+}
+
+.mix-record > span {
+
+			transition: all 0.5s ease;
+	    -ms-transition: all 0.5s ease;
+       -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+
+	font-size: 5em;
+}
+
+.mix-record > span.recording {
+
+	        transition: all 0.5s ease;
+	    -ms-transition: all 0.5s ease;
+       -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+
+	font-size: 6em;
+	color: #A00000;
+}
+
+.mix-add > span {
+
+	font-size: 5em;
+}
+
+
+.mix-button > span {
+
+	font-size: 4em;
+}
