@@ -1,5 +1,7 @@
 	
 var CrossfadeSample = {playing:false};
+var RecorderGlobal;
+
 
 CrossfadeSample.play = function() {
   // Create two sources.
@@ -18,7 +20,7 @@ CrossfadeSample.play = function() {
     this.ctl1.source.start(0);
     this.ctl2.source.start(0);
   }
-
+  
   function createSource(buffer) {
     var source = context.createBufferSource();
     var gainNode = context.createGain ? context.createGain() : context.createGainNode();
@@ -27,33 +29,8 @@ CrossfadeSample.play = function() {
     source.loop = true;
     // Connect source to gain.
     source.connect(gainNode);
-    // Connect gain to destination.
-    gainNode.connect(context.destination);
-
-    return {
-      source: source,
-      gainNode: gainNode
-    };
-  }
-  
-  function createSourceFromUrl(url) {
-	var context = new webkitAudioContext(),
-	    audio = new Audio(),
-	    source,
-	    // `stream_url` you'd get from 
-	    // requesting http://api.soundcloud.com/tracks/6981096.json
-	    url = url;
-	audio.src = url;
-	source = context.createMediaElementSource(audio);
-	source.connect(context.destination);
-	//var source = context.createBufferSource();
-	var gainNode = context.createGain ? context.createGain() : context.createGainNode();
-    //source.buffer = buffer;
-    // Turn on looping
-    source.loop = true;
-    // Connect source to gain.
-    source.connect(gainNode);
-    // Connect gain to destination.
+	
+    // Connect gain to destination.	
     gainNode.connect(context.destination);
 
     return {
@@ -71,8 +48,30 @@ CrossfadeSample.stop = function() {
   } else {
     this.ctl1.source.stop(0);
     this.ctl2.source.stop(0);
+	//RecorderGlobal.clear();
+	RecorderGlobal.stop();
+	createDownloadLink();
   }
 };
+
+function createDownloadLink() {
+    RecorderGlobal && RecorderGlobal.exportWAV(function(blob) {
+      var url = URL.createObjectURL(blob);
+      var li = document.createElement('li');
+      var au = document.createElement('audio');
+      var hf = document.createElement('a');
+      
+      au.controls = true;
+      au.src = url;
+      hf.href = url;
+      hf.download = new Date().toISOString() + '.wav';
+      hf.innerHTML = hf.download;
+      li.appendChild(au);
+      li.appendChild(hf);
+	  $('.stage').append(li);
+      //recordingslist.appendChild(li);
+    });
+  }
 
 // Fades between 0 (all source 1) and 1 (all source 2)
 CrossfadeSample.crossfade = function(element) {
@@ -82,12 +81,11 @@ CrossfadeSample.crossfade = function(element) {
   var gain2 = Math.cos((1.0 - x) * 0.5*Math.PI);
   this.ctl1.gainNode.gain.value = gain1;
   this.ctl2.gainNode.gain.value = gain2;
+  RecorderGlobal = new Recorder(this.ctl2.source);
+  RecorderGlobal.record();  
 };
 
 CrossfadeSample.toggle = function() {
   this.playing ? this.stop() : this.play();
   this.playing = !this.playing;
-  var rec = new Recorder(this.source);
-  rec.record();
-  rec.stop();  
 };
