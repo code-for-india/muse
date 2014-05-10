@@ -2,13 +2,30 @@
 var CrossfadeSample = {playing:false};
 var RecorderGlobal;
 
+var index_classical = 0; 
+var index_beat = 0; 
+
+CrossfadeSample.setClassical = function() {
+	
+	index_classical = Math.floor(Math.random() * 9) + 1;
+	// index_classical = 1;
+}
+
+CrossfadeSample.setBeat = function() {
+	
+	index_beat = index_classical;
+}
+
 
 CrossfadeSample.play = function() {
   // Create two sources.
   //this.ctl1 = createSource(BUFFERS.drums);
   //this.ctl2 = createSource(BUFFERS.organ);
-  this.ctl1 = createSource(BUFFERS.beat2);
-  this.ctl2 = createSource(BUFFERS.hindustani1);
+  
+  
+  
+  this.ctl1 = createSource(CLASSICAL_BUFFERS[index_classical]);
+  this.ctl2 = createSource(BEAT_BUFFERS[index_beat]);
   
   // Mute the second source.
   this.ctl1.gainNode.gain.value = 0;
@@ -20,6 +37,9 @@ CrossfadeSample.play = function() {
     this.ctl1.source.start(0);
     this.ctl2.source.start(0);
   }
+  
+  RecorderGlobal = new Recorder(this.ctl2.source);
+  RecorderGlobal.record();
   
   function createSource(buffer) {
     var source = context.createBufferSource();
@@ -68,7 +88,7 @@ function createDownloadLink() {
       hf.innerHTML = hf.download;
       li.appendChild(au);
       li.appendChild(hf);
-	  $('.stage').append(li);
+	  // $('.stage').append(li);
       //recordingslist.appendChild(li);
     });
   }
@@ -81,8 +101,7 @@ CrossfadeSample.crossfade = function(element) {
   var gain2 = Math.cos((1.0 - x) * 0.5*Math.PI);
   this.ctl1.gainNode.gain.value = gain1;
   this.ctl2.gainNode.gain.value = gain2;
-  RecorderGlobal = new Recorder(this.ctl2.source);
-  RecorderGlobal.record();  
+    
 };
 
 CrossfadeSample.toggle = function() {

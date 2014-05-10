@@ -13,6 +13,13 @@
 	text-align: center;
 }
 
+.logo {
+	
+	position: relative !important;
+	left: 0px !important;
+	text-align: center !important;
+}
+
 .search {
 
 	display: inline-block;
@@ -38,8 +45,7 @@
 .mixes {
 
 	margin-top: 30px;
-	min-height: 220px;
-	border-bottom: 1px solid;
+	min-height: 200px;
 }
 
 .stage {

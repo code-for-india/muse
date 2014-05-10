@@ -71,6 +71,8 @@ $('document').ready(function() {
 
 			}, 500);
 		}
+		
+		CrossfadeSample.toggle();
 	});
 
 });

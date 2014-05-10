@@ -1,43 +1,63 @@
 // Keep track of all loaded buffers.
-var BUFFERS = {};
+var CLASSICAL_BUFFERS = [];
+var BEAT_BUFFERS = [];
 // Page-wide audio context.
 var context = null;
 
 // An object to track the buffers to load {name: path}
-var BUFFERS_TO_LOAD = {
-  kick: 'sounds/kick.wav',
-  snare: 'sounds/snare.wav',
-  hihat: 'sounds/hihat.wav',
-  jam: 'sounds/br-jam-loop.wav',
-  crowd: 'sounds/kick.wav',
-  drums: 'sounds/kick.wav',
-  organ: 'sounds/organ-echo-chords.wav',
-  techno: 'sounds/kick.wav',
-  beat1: 'sounds/beat1.wav',
-  beat2: 'sounds/beat2.wav',
-  carnatic1: 'sounds/carnatic1.wav',
-  hindustani1: 'sounds/hindustani1.wav', 
+var CLASSICAL_BUFFERS_TO_LOAD = [
+  'sounds/beat1.wav',
+  'sounds/beat2.wav'
   //carnatic2: 'http://api.soundcloud.com/tracks/6981096/stream?client_id=90a62526f8faf6afefa28fcc99ec3b35'
-};
+  ];
+
+var BEAT_BUFFERS_TO_LOAD = [
+	'sounds/carnatic1.wav',
+	'sounds/hindustani1.wav' 
+];
 
 // Loads all sound samples into the buffers object.
 function loadBuffers() {
   // Array-ify
   var names = [];
   var paths = [];
-  for (var name in BUFFERS_TO_LOAD) {
-    var path = BUFFERS_TO_LOAD[name];
-    names.push(name);
+  
+  for (var i = 0; i < CLASSICAL_BUFFERS_TO_LOAD.length; i++) {
+    var path = CLASSICAL_BUFFERS_TO_LOAD[i];
+    names.push(i);
     paths.push(path);
   }
+  
   bufferLoader = new BufferLoader(context, paths, function(bufferList) {
     for (var i = 0; i < bufferList.length; i++) {
       var buffer = bufferList[i];
-      var name = names[i];
-      BUFFERS[name] = buffer;
+      // var name = names[i];
+      CLASSICAL_BUFFERS[i] = buffer;
     }
   });
+  
   bufferLoader.load();
+  
+  var names = [];
+  var paths = [];
+  
+  for (var i = 0; i < BEAT_BUFFERS_TO_LOAD.length; i++) {
+    var path = BEAT_BUFFERS_TO_LOAD[i];
+    names.push(i);
+    paths.push(path);
+  }
+  
+  bufferLoader = new BufferLoader(context, paths, function(bufferList) {
+    for (var i = 0; i < bufferList.length; i++) {
+      var buffer = bufferList[i];
+      // var name = names[i];
+      BEAT_BUFFERS[i] = buffer;
+    }
+  });
+  
+  bufferLoader.load();
+  
+  
 }
 
 document.addEventListener('DOMContentLoaded', function() {

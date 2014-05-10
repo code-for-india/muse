@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Bootstrap 101 Template</title>
+    <title>Muse - Discover, mix and share your Indian heritage</title>
 
     <!-- Bootstrap -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -46,22 +46,26 @@
       <div class="mixes">
 
         <div class="mix widget">
+			
+		    <button type="button" class="btn btn-primary btn-lg" onclick = "CrossfadeSample.setClassical()">Pick a classical</button>
+			
 
           <!-- <div class="mix-button"> <i class="fa fa-play-circle fa-5x"></i> </div> -->
-          <div class="mix-info"> <p class="mix-seek"> </p> <p> Vande Mataram by A.R.Rahman </p>  </div>
+          <!-- <div class="mix-info"> <p class="mix-seek"> </p> <p> Vande Mataram by A.R.Rahman </p>  </div> -->
         </div>
 
 
         <div class="mix widget">
+			
+		    <button type="button" class="btn btn-primary btn-lg" onclick="CrossfadeSample.setBeat()">Pick a beat</button>
+			
 
           <!-- <div class="mix-button"> <i class="fa fa-play-circle fa-5x"></i> </div> -->
-          <div class="mix-info"> <p class="mix-seek"> </p> <p> Vande Mataram by A.R.Rahman </p>  </div>
+          <!-- <div class="mix-info"> <p class="mix-seek"> </p> <p> Vande Mataram by A.R.Rahman </p>  </div> -->
         </div>
 
-		<p><input type="button" onclick="CrossfadeSample.toggle();" value="Play/Pause"/>
-		<form style="float:center;padding:6rem">
-		<input type="range" min="0" max="100" value="100" oninput="CrossfadeSample.crossfade(this);" /> </p>
-		</form>
+		<!-- <p><input type="button" onclick="CrossfadeSample.toggle();" value="Play/Pause"/> -->
+		
 		</div>
         <!-- ><div id="slider"></div> -->
 
@@ -74,6 +78,10 @@
           <span class="glyphicon glyphicon-record"></span>
 
         </div>
+		
+		<form style="float:center;padding:6rem">
+		<input type="range" min="0" max="100" value="100" oninput="CrossfadeSample.crossfade(this);" /> </p>
+		</form>
 
          <div class="mix-result">
 
@@ -84,10 +92,6 @@
       </div>
 
     </div>
-
-
-
-
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
