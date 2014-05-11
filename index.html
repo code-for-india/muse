@@ -14,7 +14,7 @@
     <link href="vendor/slider/css/slider.css" rel="stylesheet">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <meta charset="utf-8">
-	
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -47,9 +47,9 @@
       <div class="mixes">
 
         <div class="mix widget">
-			
-		    <button type="button" class="btn btn-primary btn-lg" id="btnPickClassical" onclick = "CrossfadeSample.setClassical(this)">Pick a classical</button>
-			
+
+		    <button type="button" class="btn btn-primary btn-lg" id="btnPickClassical" onclick = "CrossfadeSample.setClassical(this)"> <span class="glyphicon glyphicon-random" style="padding-right: 10px"></span> Pick a classical</button>
+
 
           <!-- <div class="mix-button"> <i class="fa fa-play-circle fa-5x"></i> </div> -->
           <p class="mix-info"> </p>
@@ -57,16 +57,16 @@
 
 
         <div class="mix widget">
-			
-		    <button type="button" class="btn btn-primary btn-lg" id="btnPickBeat" onclick="CrossfadeSample.setBeat(this)">Pick a beat</button>
-			
+
+		    <button type="button" class="btn btn-primary btn-lg" id="btnPickBeat" onclick="CrossfadeSample.setBeat(this)"> <span class="glyphicon glyphicon-random" style="padding-right: 10px"></span> Pick a beat</button>
+
 
           <!-- <div class="mix-button"> <i class="fa fa-play-circle fa-5x"></i> </div> -->
           <p class="mix-info"> </p>
         </div>
 
 		<!-- <p><input type="button" onclick="CrossfadeSample.toggle();" value="Play/Pause"/> -->
-		
+
 		</div>
         <!-- ><div id="slider"></div> -->
 
@@ -79,7 +79,17 @@
           <span class="glyphicon glyphicon-record"></span>
 
         </div>
-		
+
+        <div>
+
+          <div style="float:left; padding-left: 50px">
+          <span class="glyphicon glyphicon-arrow-left"></span> CLASSICAL </div>
+
+          <div style="float:right; padding-right: 50px">
+          BEAT <span class="glyphicon glyphicon-arrow-right"></span> </div>
+
+        </div>
+
 		<form style="float:center;padding:6rem">
 		<input type="range" min="0" max="100" value="0" oninput="CrossfadeSample.crossfade(this);" /> </p>
 		</form>
@@ -88,10 +98,10 @@
 
           <div class="mix-button"> <i class="fa fa-play-circle fa-5x"></i> </div>
           <div class="mix-info" id="resultInfo"> </div>
-		  
+
 		  <a href="https://twitter.com/share" class="twitter-share-button" data-text="Meet Classical Indian Music -" data-hashtags="cfihackaton">Tweet</a>
 		  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-		  
+
         </div>
 
       </div>
@@ -113,7 +123,7 @@
 	<script src="js/init.js"></script>
 	<script src="js/recorder.js"></script>
 	<script src="js/recorderWorker.js"></script>
-	
+
 
   </body>
 </html>
