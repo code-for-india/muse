@@ -2,18 +2,32 @@
 var CrossfadeSample = {playing:false};
 var RecorderGlobal;
 
-var index_classical = 0; 
-var index_beat = 0; 
+var index_classical; 
+var index_beat; 
 
-CrossfadeSample.setClassical = function() {
+CrossfadeSample.setClassical = function(el) {
 	
 	index_classical = Math.floor(Math.random() * 9) + 1;
 	// index_classical = 1;
+	
+	console.log($(el).next());
+	console.log(CLASSICAL_BUFFERS_TO_LOAD[index_classical]);
+	
+	var name = CLASSICAL_BUFFERS_TO_LOAD[index_classical];
+	
+	$(el).next().html(name.substring(name.indexOf('/')+1, name.indexOf('.')));
 }
 
-CrossfadeSample.setBeat = function() {
+CrossfadeSample.setBeat = function(el) {
 	
-	index_beat = index_classical;
+	index_beat = Math.floor(Math.random() * 9) + 1;
+	
+	console.log($(el).next());
+	console.log(BEAT_BUFFERS_TO_LOAD[index_beat]);
+	
+	var name = BEAT_BUFFERS_TO_LOAD[index_beat];
+	
+	$(el).next().html(name.substring(name.indexOf('/')+1, name.indexOf('.')));
 }
 
 
@@ -22,13 +36,17 @@ CrossfadeSample.play = function() {
   //this.ctl1 = createSource(BUFFERS.drums);
   //this.ctl2 = createSource(BUFFERS.organ);
   
-  
+  if(typeof index_classical == "undefined") {
+  	
+	  CrossfadeSample.setClassical(document.getElementById('btnPickClassical'));
+	  CrossfadeSample.setBeat(document.getElementById('btnPickBeat'));
+  }
   
   this.ctl1 = createSource(CLASSICAL_BUFFERS[index_classical]);
   this.ctl2 = createSource(BEAT_BUFFERS[index_beat]);
   
   // Mute the second source.
-  this.ctl1.gainNode.gain.value = 0;
+  this.ctl2.gainNode.gain.value = 0;
   // Start playback in a loop
   if (!this.ctl1.source.start) {
     this.ctl1.source.noteOn(0);
@@ -96,6 +114,16 @@ function createDownloadLink() {
 // Fades between 0 (all source 1) and 1 (all source 2)
 CrossfadeSample.crossfade = function(element) {
   var x = parseInt(element.value) / parseInt(element.max);
+  // Use an equal-power crossfading curve:
+  var gain1 = Math.cos(x * 0.5*Math.PI);
+  var gain2 = Math.cos((1.0 - x) * 0.5*Math.PI);
+  this.ctl1.gainNode.gain.value = gain1;
+  this.ctl2.gainNode.gain.value = gain2;
+    
+};
+
+CrossfadeSample.hackingcrossfade = function(n) {
+  var x = n / 100;
   // Use an equal-power crossfading curve:
   var gain1 = Math.cos(x * 0.5*Math.PI);
   var gain2 = Math.cos((1.0 - x) * 0.5*Math.PI);

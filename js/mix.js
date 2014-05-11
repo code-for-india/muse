@@ -9,6 +9,18 @@ $('document').ready(function() {
 
 	var button_record;
 	var blink;
+	
+	$( "#input-classical" ).autocomplete({
+	      source: CLASSICAL_BUFFERS_TO_LOAD,
+		select: function(e, ui) {
+			// var a = ui.item.value;
+		    // var d = a.substring(a.indexOf('/') + 1, a.indexOf('.')));
+		}
+	});
+		
+	$( "#input-beat" ).autocomplete({
+	      source: BEAT_BUFFERS_TO_LOAD
+		});
 
 	$(".mix-add").on("click", "span", function() {
 
@@ -52,6 +64,15 @@ $('document').ready(function() {
 			// upload result to soundcloud
 
 			$( ".mix-result" ).css( "opacity", "1" );
+			
+			var r1 = $('#btnPickClassical').next().text();
+			var r2 = $('#btnPickBeat').next().text();
+			
+			console.log(r1);
+			console.log(r2);
+			
+			$("#resultInfo").text("Remix - " + r1 + " ft. " + r2);
+			
 
 		} else {
 
@@ -73,6 +94,15 @@ $('document').ready(function() {
 		}
 		
 		CrossfadeSample.toggle();
+	});
+	
+	$('.mix-result').on("click", ".mix-button", function() {
+		
+		CrossfadeSample.toggle();
+		setTimeout(function() {
+				CrossfadeSample.hackingcrossfade(50);
+		}, 4000);
+		
 	});
 
 });

@@ -32,14 +32,15 @@
   </head>
   <body class="background-dark">
 	  <div class="logo centered">
-	      <h2><a href="index.html">Classical <strong>Mix</strong> </a></h2>
+	      <h1><a href="index.html"> <strong>Muse</strong> </a></h1>
 	  </div>
 
     <div class="container">
 
       <div class="search">
 
-        <input type="text" class="form-control" id="input-song" placeholder="Add a new song">
+        <input type="text" class="form-control" id="input-classical" placeholder="Search a classical">
+	    <input type="text" class="form-control" id="input-beat" placeholder="Search a beat">
 
       </div>
 
@@ -47,21 +48,21 @@
 
         <div class="mix widget">
 			
-		    <button type="button" class="btn btn-primary btn-lg" onclick = "CrossfadeSample.setClassical()">Pick a classical</button>
+		    <button type="button" class="btn btn-primary btn-lg" id="btnPickClassical" onclick = "CrossfadeSample.setClassical(this)">Pick a classical</button>
 			
 
           <!-- <div class="mix-button"> <i class="fa fa-play-circle fa-5x"></i> </div> -->
-          <!-- <div class="mix-info"> <p class="mix-seek"> </p> <p> Vande Mataram by A.R.Rahman </p>  </div> -->
+          <p class="mix-info"> </p>
         </div>
 
 
         <div class="mix widget">
 			
-		    <button type="button" class="btn btn-primary btn-lg" onclick="CrossfadeSample.setBeat()">Pick a beat</button>
+		    <button type="button" class="btn btn-primary btn-lg" id="btnPickBeat" onclick="CrossfadeSample.setBeat(this)">Pick a beat</button>
 			
 
           <!-- <div class="mix-button"> <i class="fa fa-play-circle fa-5x"></i> </div> -->
-          <!-- <div class="mix-info"> <p class="mix-seek"> </p> <p> Vande Mataram by A.R.Rahman </p>  </div> -->
+          <p class="mix-info"> </p>
         </div>
 
 		<!-- <p><input type="button" onclick="CrossfadeSample.toggle();" value="Play/Pause"/> -->
@@ -80,13 +81,17 @@
         </div>
 		
 		<form style="float:center;padding:6rem">
-		<input type="range" min="0" max="100" value="100" oninput="CrossfadeSample.crossfade(this);" /> </p>
+		<input type="range" min="0" max="100" value="0" oninput="CrossfadeSample.crossfade(this);" /> </p>
 		</form>
 
-         <div class="mix-result">
+         <div class="mix-result" style="vertical-align: top">
 
           <div class="mix-button"> <i class="fa fa-play-circle fa-5x"></i> </div>
-          <div class="mix-info"> <p class="mix-seek"> </p> <p> Remix - Vande Mataram + Vande Mataram </p>  </div>
+          <div class="mix-info" id="resultInfo"> </div>
+		  
+		  <a href="https://twitter.com/share" class="twitter-share-button" data-text="Meet Classical Indian Music -" data-hashtags="cfihackaton">Tweet</a>
+		  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+		  
         </div>
 
       </div>

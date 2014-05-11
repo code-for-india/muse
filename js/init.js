@@ -5,15 +5,33 @@ var BEAT_BUFFERS = [];
 var context = null;
 
 // An object to track the buffers to load {name: path}
-var CLASSICAL_BUFFERS_TO_LOAD = [
-  'sounds/beat1.wav',
-  'sounds/beat2.wav'
+var BEAT_BUFFERS_TO_LOAD = [
+  'sounds/90_dub_beat.wav',
+  'sounds/95bpm_Loop01.wav',
+  'sounds/130_02_4_A.wav',
+  'sounds/Bebob_Beat.wav',
+  'sounds/danceBeat.wav',
+  'sounds/Eaxdub_1.wav',
+  'sounds/Electroclash_021_115.wav',
+  'sounds/Loop_85.wav',
+  'sounds/multibeat2.wav',
+  'sounds/Musical_beat.wav',
+  'sounds/perforated_beat.wav'
   //carnatic2: 'http://api.soundcloud.com/tracks/6981096/stream?client_id=90a62526f8faf6afefa28fcc99ec3b35'
   ];
 
-var BEAT_BUFFERS_TO_LOAD = [
-	'sounds/carnatic1.wav',
-	'sounds/hindustani1.wav' 
+var CLASSICAL_BUFFERS_TO_LOAD = [
+	'sounds/abdul reheman kachwala - sab ka ek hi palanhar.wav',
+	'sounds/Ashwathamma of Bangalore - Dheena Ha Priya.wav',
+	'sounds/Badi Moti Bai - Vasant Rutu Bahar.wav',
+	'sounds/bai gangubai hangal- aye banta ban aaye - BHAIRAVI.wav',
+	'sounds/bhimsen Joshi - batiya tora - SHUDH KALYAN.wav',
+	'sounds/D K Pattammal - Dharanithanu.wav',
+	'sounds/D K Pattammal - Valli kanavan (Kavadichindu) .wav',
+	'sounds/M S Subbulakshmi - Yaro Ivar Yaro - Bhairavi.wav',
+	'sounds/M. Ramachandra Rao of Bangalore - Carnatic.wav',
+	'sounds/Moghubai Kurdikar.wav',
+	'sounds/Sawai Gandharva - bin dekhe pade nahi chain.wav' 
 ];
 
 // Loads all sound samples into the buffers object.
