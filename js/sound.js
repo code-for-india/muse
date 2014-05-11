@@ -1,33 +1,60 @@
-	
+
 var CrossfadeSample = {playing:false};
 var RecorderGlobal;
 
-var index_classical; 
-var index_beat; 
+var index_classical;
+var index_beat;
+
+CrossfadeSample.setStrictClassical = function(el, n) {
+
+  console.log(n);
+
+  index_classical = n;
+  // index_classical = 1;
+
+  console.log($(el).next());
+  console.log(CLASSICAL_BUFFERS_TO_LOAD[index_classical]);
+
+  var name = CLASSICAL_BUFFERS_TO_LOAD[index_classical];
+
+  $(el).next().html(name.substring(name.indexOf('/')+1, name.indexOf('.')));
+}
 
 CrossfadeSample.setClassical = function(el) {
-	
+
 	index_classical = Math.floor(Math.random() * 9) + 1;
 	// index_classical = 1;
-	
+
 	console.log($(el).next());
 	console.log(CLASSICAL_BUFFERS_TO_LOAD[index_classical]);
-	
+
 	var name = CLASSICAL_BUFFERS_TO_LOAD[index_classical];
-	
+
 	$(el).next().html(name.substring(name.indexOf('/')+1, name.indexOf('.')));
 }
 
 CrossfadeSample.setBeat = function(el) {
-	
+
 	index_beat = Math.floor(Math.random() * 9) + 1;
-	
+
 	console.log($(el).next());
 	console.log(BEAT_BUFFERS_TO_LOAD[index_beat]);
-	
+
 	var name = BEAT_BUFFERS_TO_LOAD[index_beat];
-	
+
 	$(el).next().html(name.substring(name.indexOf('/')+1, name.indexOf('.')));
+}
+
+CrossfadeSample.setStrictBeat = function(el, n) {
+
+  index_beat = n;
+
+  console.log($(el).next());
+  console.log(BEAT_BUFFERS_TO_LOAD[index_beat]);
+
+  var name = BEAT_BUFFERS_TO_LOAD[index_beat];
+
+  $(el).next().html(name.substring(name.indexOf('/')+1, name.indexOf('.')));
 }
 
 
@@ -35,16 +62,16 @@ CrossfadeSample.play = function() {
   // Create two sources.
   //this.ctl1 = createSource(BUFFERS.drums);
   //this.ctl2 = createSource(BUFFERS.organ);
-  
+
   if(typeof index_classical == "undefined") {
-  	
+
 	  CrossfadeSample.setClassical(document.getElementById('btnPickClassical'));
 	  CrossfadeSample.setBeat(document.getElementById('btnPickBeat'));
   }
-  
+
   this.ctl1 = createSource(CLASSICAL_BUFFERS[index_classical]);
   this.ctl2 = createSource(BEAT_BUFFERS[index_beat]);
-  
+
   // Mute the second source.
   this.ctl2.gainNode.gain.value = 0;
   // Start playback in a loop
@@ -55,10 +82,10 @@ CrossfadeSample.play = function() {
     this.ctl1.source.start(0);
     this.ctl2.source.start(0);
   }
-  
+
   RecorderGlobal = new Recorder(this.ctl2.source);
   RecorderGlobal.record();
-  
+
   function createSource(buffer) {
     var source = context.createBufferSource();
     var gainNode = context.createGain ? context.createGain() : context.createGainNode();
@@ -67,8 +94,8 @@ CrossfadeSample.play = function() {
     source.loop = true;
     // Connect source to gain.
     source.connect(gainNode);
-	
-    // Connect gain to destination.	
+
+    // Connect gain to destination.
     gainNode.connect(context.destination);
 
     return {
@@ -98,7 +125,7 @@ function createDownloadLink() {
       var li = document.createElement('li');
       var au = document.createElement('audio');
       var hf = document.createElement('a');
-      
+
       au.controls = true;
       au.src = url;
       hf.href = url;
@@ -119,7 +146,7 @@ CrossfadeSample.crossfade = function(element) {
   var gain2 = Math.cos((1.0 - x) * 0.5*Math.PI);
   this.ctl1.gainNode.gain.value = gain1;
   this.ctl2.gainNode.gain.value = gain2;
-    
+
 };
 
 CrossfadeSample.hackingcrossfade = function(n) {
@@ -129,7 +156,7 @@ CrossfadeSample.hackingcrossfade = function(n) {
   var gain2 = Math.cos((1.0 - x) * 0.5*Math.PI);
   this.ctl1.gainNode.gain.value = gain1;
   this.ctl2.gainNode.gain.value = gain2;
-    
+
 };
 
 CrossfadeSample.toggle = function() {
