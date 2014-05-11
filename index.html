@@ -90,6 +90,14 @@
 
   	  FB.getLoginStatus(function(response) {
   	    statusChangeCallback(response);
+		FB.api('/me', function(user) {
+		           if(user != null) {
+		              var image = document.getElementById('fbpic');
+		              image.src = 'http://graph.facebook.com/' + user.id + '/picture';
+		              var name = document.getElementById('fbname');
+		              name.innerHTML = user.name
+		           }
+		         });
   	  });
 
   	  };
@@ -111,7 +119,6 @@
   	      console.log('Successful login for: ' + response.name);
   	      document.getElementById('status').innerHTML =
   	        'Thanks for logging in, ' + response.name + '!';
-
   	    });
   	  }
   	</script>
@@ -133,9 +140,9 @@
                             <i class="fa fa-user"></i>
                         </a>
                         <ul id="account-menu" class="dropdown-menu account" role="menu">
-                            <li role="presentation" class="account-picture">
-                                <img src="img/2.jpg" alt="">
-                                Philip Daineka
+                            <li role="presentation" class="account-picture">                                
+								<img id='fbpic' alt="">
+                                <div id="fbname"> </div>
                             </li>
                             <li role="presentation">
                                 <a href="form_account.html" class="link">
