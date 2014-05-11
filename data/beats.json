@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Test Beat One",
+        "genre": "Australia & South Pacific",
+        "raga": "Oceania and Australia",    
+        "file": "beat (1).wav"
+    },
+    {
+        "name": "Test Beat Two",
+        "genre": "Australia & South Pacific",
+        "raga": "Oceania and Australia",
+        "file": "beat (1).wav"    
+    },
+    {
+        "name": "Test Beat Three",
+        "genre": "Australia & South Pacific",
+        "raga": "Oceania and Australia",
+        "file": "beat (2).wav"            
+    },
+    {
+        "name": "Test Beat Four",
+        "genre": "Australia & South Pacific",
+        "raga": "Oceania and Australia",
+        "file": "beat (2).wav"    
+    }  
+]
