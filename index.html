@@ -122,9 +122,17 @@
   	    });
   	  }
   	</script>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=745465452170497&version=v2.0";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+
 	  
   </div>
-	  <div class="wrap">
+	  <div class="wrap" style="position:absolute; right:10px">
 	      <header class="page-header">
 	          <div class="navbar">
 	                  <ul class="nav navbar-nav navbar-right pull-right">
@@ -165,7 +173,8 @@
 	                </ul>
 				        </div>
 					</div>
-				    </header>
+				</header>
+			</div>
 
     <div class="container">
 
@@ -230,10 +239,12 @@
 
           <div class="mix-button"> <i class="fa fa-play-circle fa-5x"></i> </div>
           <div class="mix-info" id="resultInfo"> </div>
+		  
+		  
 
 		  <a href="https://twitter.com/share" class="twitter-share-button" data-text="Meet Classical Indian Music -" data-hashtags="cfihackaton">Tweet</a>
 		  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
+		  <div class="fb-share-button" data-href="http://54.82.150.90/indianMusicArchive/" data-type="button_count"></div>
         </div>
 
       </div>
