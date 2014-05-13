@@ -11,18 +11,17 @@ $('document').ready(function() {
 	var blink;
 
 	$( "#input-classical" ).autocomplete({
-	      source: CLASSICAL_BUFFERS_TO_LOAD,
+
+		source: CLASSICAL_BUFFERS_TO_LOAD,
 		select: function(e, ui) {
-
 			var n = $.inArray(ui.item.value, CLASSICAL_BUFFERS_TO_LOAD);
-			console.log(n);
-
 			CrossfadeSample.setStrictClassical(document.getElementById('btnPickClassical'), n);
 		}
 	});
 
 	$( "#input-beat" ).autocomplete({
-	      source: BEAT_BUFFERS_TO_LOAD,
+
+		source: BEAT_BUFFERS_TO_LOAD,
 		select: function(e, ui) {
 
 			var n = $.inArray(ui.item.value, BEAT_BUFFERS_TO_LOAD);

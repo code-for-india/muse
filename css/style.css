@@ -5,7 +5,7 @@
 
 }
 
-.search,
+.muse-search,
 .mixes,
 .stage {
 
@@ -14,13 +14,13 @@
 }
 
 .logo {
-	
+
 	position: relative !important;
 	left: 0px !important;
 	text-align: center !important;
 }
 
-.search {
+.muse-search {
 
 	display: inline-block;
 	margin: 0px auto;
@@ -32,7 +32,7 @@
 }
 
 #resultInfo {
-	
+
 	font-size: 1.5em;
 	margin-top: 40px;
 	vertical-align: top;
