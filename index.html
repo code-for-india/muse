@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Muse - Discover, mix and share your Indian heritage</title>
 
-    <!-- Bootstrap -->
+    <!-- BOOTSTRAP -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-	<link href="css/application.min.css" rel="stylesheet">
     <link href="vendor/slider/css/slider.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-    <meta charset="utf-8">
 
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- jQUERY LIBRARY -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <link href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 
+    <!-- FONT AWESOME ICONS -->
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <!-- OUR CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/application.min.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,234 +33,223 @@
 
   </head>
   <body class="background-dark">
-	  <div class="logo centered">
-	      <h1><a href="index.html"> <strong>Muse</strong> </a></h1>
-	  </div>
-  	<script>
-  	  // This is called with the results from from FB.getLoginStatus().
-  	  function statusChangeCallback(response) {
-  	    console.log('statusChangeCallback');
-  	    console.log(response);
-  	    // The response object is returned with a status field that lets the
-  	    // app know the current login status of the person.
-  	    // Full docs on the response object can be found in the documentation
-  	    // for FB.getLoginStatus().
-  	    if (response.status === 'connected') {
-  	      // Logged into your app and Facebook.
-  	      testAPI();
-  	    } else if (response.status === 'not_authorized') {
-  	      // The person is logged into Facebook, but not your app.
-  	      document.getElementById('status').innerHTML = 'Please log ' +
-  	        'into this app.';
-  	    } else {
-  	      // The person is not logged into Facebook, so we're not sure if
-  	      // they are logged into this app or not.
-  	      document.getElementById('status').innerHTML = 'Please log ' +
-  	        'into Facebook.';
-  	    }
-  	  }
 
-  	  // This function is called when someone finishes with the Login
-  	  // Button.  See the onlogin handler attached to it in the sample
-  	  // code below.
-  	  function checkLoginState() {
-  	    FB.getLoginStatus(function(response) {
-  	      statusChangeCallback(response);
-  	    });
-  	  }
+    <!-- FACEBOOK PLUGIN -->
 
-  	  window.fbAsyncInit = function() {
-  	  FB.init({
-  	    appId      : '745465452170497',
-  	    cookie     : true,  // enable cookies to allow the server to access 
-  	                        // the session
-  	    xfbml      : true,  // parse social plugins on this page
-  	    version    : 'v2.0' // use version 2.0
-  	  });
+    	<script>
+    	  // This is called with the results from from FB.getLoginStatus().
+    	  function statusChangeCallback(response) {
+    	    console.log('statusChangeCallback');
+    	    console.log(response);
+    	    // The response object is returned with a status field that lets the
+    	    // app know the current login status of the person.
+    	    // Full docs on the response object can be found in the documentation
+    	    // for FB.getLoginStatus().
+    	    if (response.status === 'connected') {
+    	      // Logged into your app and Facebook.
+    	      testAPI();
+    	    } else if (response.status === 'not_authorized') {
+    	      // The person is logged into Facebook, but not your app.
+    	      document.getElementById('status').innerHTML = 'Please log ' +
+    	        'into this app.';
+    	    } else {
+    	      // The person is not logged into Facebook, so we're not sure if
+    	      // they are logged into this app or not.
+    	      document.getElementById('status').innerHTML = 'Please log ' +
+    	        'into Facebook.';
+    	    }
+    	  }
 
-  	  // Now that we've initialized the JavaScript SDK, we call 
-  	  // FB.getLoginStatus().  This function gets the state of the
-  	  // person visiting this page and can return one of three states to
-  	  // the callback you provide.  They can be:
-  	  //
-  	  // 1. Logged into your app ('connected')
-  	  // 2. Logged into Facebook, but not your app ('not_authorized')
-  	  // 3. Not logged into Facebook and can't tell if they are logged into
-  	  //    your app or not.
-  	  //
-  	  // These three cases are handled in the callback function.
+    	  // This function is called when someone finishes with the Login
+    	  // Button.  See the onlogin handler attached to it in the sample
+    	  // code below.
+    	  function checkLoginState() {
+    	    FB.getLoginStatus(function(response) {
+    	      statusChangeCallback(response);
+    	    });
+    	  }
 
-  	  FB.getLoginStatus(function(response) {
-  	    statusChangeCallback(response);
-		FB.api('/me', function(user) {
-		           if(user != null) {
-		              var image = document.getElementById('fbpic');
-		              image.src = 'http://graph.facebook.com/' + user.id + '/picture';
-		              var name = document.getElementById('fbname');
-		              name.innerHTML = user.name
-		           }
-		         });
-  	  });
+    	  window.fbAsyncInit = function() {
+      	  FB.init({
+      	    appId      : '745465452170497',
+      	    cookie     : true,  // enable cookies to allow the server to access
+      	                        // the session
+      	    xfbml      : true,  // parse social plugins on this page
+      	    version    : 'v2.0' // use version 2.0
+      	  });
 
-  	  };
+      	  // Now that we've initialized the JavaScript SDK, we call
+      	  // FB.getLoginStatus().  This function gets the state of the
+      	  // person visiting this page and can return one of three states to
+      	  // the callback you provide.  They can be:
+      	  //
+      	  // 1. Logged into your app ('connected')
+      	  // 2. Logged into Facebook, but not your app ('not_authorized')
+      	  // 3. Not logged into Facebook and can't tell if they are logged into
+      	  //    your app or not.
+      	  //
+      	  // These three cases are handled in the callback function.
 
-  	  // Load the SDK asynchronously
-  	  (function(d, s, id) {
-  	    var js, fjs = d.getElementsByTagName(s)[0];
-  	    if (d.getElementById(id)) return;
-  	    js = d.createElement(s); js.id = id;
-  	    js.src = "//connect.facebook.net/en_US/sdk.js";
-  	    fjs.parentNode.insertBefore(js, fjs);
-  	  }(document, 'script', 'facebook-jssdk'));
+      	  FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+            FB.api('/me', function(user) {
+              if(user != null) {
+                var image = document.getElementById('fbpic');
+                image.src = 'http://graph.facebook.com/' + user.id + '/picture';
+                var name = document.getElementById('fbname');
+                name.innerHTML = user.name
+              }
+            });
+          });
+        };
 
-  	  // Here we run a very simple test of the Graph API after login is
-  	  // successful.  See statusChangeCallback() for when this call is made.
-  	  function testAPI() {
-  	    console.log('Welcome!  Fetching your information.... ');
-  	    FB.api('/me', function(response) {
-  	      console.log('Successful login for: ' + response.name);
-  	      document.getElementById('status').innerHTML =
-  	        'Thanks for logging in, ' + response.name + '!';
-  	    });
-  	  }
-  	</script>
-	<script>(function(d, s, id) {
-	  var js, fjs = d.getElementsByTagName(s)[0];
-	  if (d.getElementById(id)) return;
-	  js = d.createElement(s); js.id = id;
-	  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=745465452170497&version=v2.0";
-	  fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    	  // Load the SDK asynchronously
+    	  (function(d, s, id) {
+    	    var js, fjs = d.getElementsByTagName(s)[0];
+    	    if (d.getElementById(id)) return;
+    	    js = d.createElement(s); js.id = id;
+    	    js.src = "//connect.facebook.net/en_US/sdk.js";
+    	    fjs.parentNode.insertBefore(js, fjs);
+    	  }(document, 'script', 'facebook-jssdk'));
 
-	  ga('create', 'UA-50928300-1', 'listentomuse.us');
-	  ga('send', 'pageview');
+    	  // Here we run a very simple test of the Graph API after login is
+    	  // successful.  See statusChangeCallback() for when this call is made.
+    	  function testAPI() {
+    	    console.log('Welcome!  Fetching your information.... ');
+    	    FB.api('/me', function(response) {
+    	      console.log('Successful login for: ' + response.name);
+    	      document.getElementById('status').innerHTML =
+    	        'Thanks for logging in, ' + response.name + '!';
+    	    });
+    	  }
+    	</script>
 
-	</script>
+    	<script>
 
-	  
-  </div>
-	  <div class="wrap" style="position:absolute; right:10px">
-	      <header class="page-header">
-	          <div class="navbar">
-	                  <ul class="nav navbar-nav navbar-right pull-right">
-	                      <li class="visible-phone-landscape">
-	                          <a href="#" id="search-toggle">
-	                              <i class="fa fa-search"></i>
-	                          </a>
-	                      </li>
-                    <li class="hidden-xs dropdown">
-                        <a href="#" title="Account" id="account"
-                           class="dropdown-toggle"
-                           data-toggle="dropdown">
-                            <i class="fa fa-user"></i>
-                        </a>
-                        <ul id="account-menu" class="dropdown-menu account" role="menu">
-                            <li role="presentation" class="account-picture">                                
-								<img id='fbpic' alt="">
-                                <div id="fbname"> </div>
-                            </li>
-                            <li role="presentation">
-                                <a href="form_account.html" class="link">
-                                    <i class="fa fa-user"></i>
-                                    Profile
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-	                    <li class="visible-xs">
-	                        <a href="#"
-	                           class="btn-navbar"
-	                           data-toggle="collapse"
-	                           data-target=".sidebar"
-	                           title="">
-	                            <i class="fa fa-bars"></i>
-	                        </a>
-	                    </li>
-	                    <li class="hidden-xs"><a href="login.html"><i class="fa fa-sign-out"></i></a></li>
-	                </ul>
-				        </div>
-					</div>
-				</header>
-			</div>
+        (function(d, s, id) {
+    	  var js, fjs = d.getElementsByTagName(s)[0];
+    	  if (d.getElementById(id)) return;
+    	  js = d.createElement(s); js.id = id;
+    	  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=745465452170497&version=v2.0";
+    	  fjs.parentNode.insertBefore(js, fjs);
+    	  }(document, 'script', 'facebook-jssdk'));
+      </script>
+
+    	<script>
+
+    	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    	  ga('create', 'UA-50928300-1', 'listentomuse.us');
+    	  ga('send', 'pageview');
+    	</script>
+
+      <div class="wrap" style="position:absolute; right:10px">
+        <header class="page-header">
+          <div class="navbar">
+            <ul class="nav navbar-nav navbar-right pull-right">
+                <li class="visible-phone-landscape">
+                    <a href="#" id="search-toggle">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </li>
+                <li class="hidden-xs dropdown">
+                    <a href="#" title="Account" id="account"
+                       class="dropdown-toggle"
+                       data-toggle="dropdown">
+                        <i class="fa fa-user"></i>
+                    </a>
+                    <ul id="account-menu" class="dropdown-menu account" role="menu">
+                        <li role="presentation" class="account-picture">
+  					              <img id='fbpic' alt="">
+                          <div id="fbname"> </div>
+                        </li>
+
+                        <li role="presentation">
+                            <a href="form_account.html" class="link">
+                                <i class="fa fa-user"></i> Profile
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="visible-xs">
+                    <a href="#"
+                       class="btn-navbar"
+                       data-toggle="collapse"
+                       data-target=".sidebar"
+                       title="">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                </li>
+                <li class="hidden-xs"><a href="login.html"><i class="fa fa-sign-out"></i></a></li>
+            </ul>
+  		    </div>
+  			</header>
+  		</div>
+
+    <div class="logo centered">
+        <h1><a href="index.html"> <strong>Muse</strong> </a></h1>
+    </div>
 
     <div class="container">
 
       <div class="search">
-
         <input type="text" class="form-control" id="input-classical" placeholder="Search a classical">
-	    <input type="text" class="form-control" id="input-beat" placeholder="Search a beat">
-
+        <input type="text" class="form-control" id="input-beat" placeholder="Search a beat">
       </div>
 
       <div class="mixes">
 
         <div class="mix widget">
 
-		    <button type="button" class="btn btn-primary btn-lg" id="btnPickClassical" onclick = "CrossfadeSample.setClassical(this)"> <span class="glyphicon glyphicon-random" style="padding-right: 10px"></span> Pick a Song</button>
-
-
-          <!-- <div class="mix-button"> <i class="fa fa-play-circle fa-5x"></i> </div> -->
+		      <button type="button" class="btn btn-primary btn-lg" id="btnPickClassical" onclick = "CrossfadeSample.setClassical(this)"> <span class="glyphicon glyphicon-random" style="padding-right: 10px"></span> Pick a Song</button>
           <p class="mix-info"> </p>
-        </div>
 
+        </div>
 
         <div class="mix widget">
 
-		    <button type="button" class="btn btn-primary btn-lg" id="btnPickBeat" onclick="CrossfadeSample.setBeat(this)"> <span class="glyphicon glyphicon-random" style="padding-right: 10px"></span> Pick a beat</button>
-
-
-          <!-- <div class="mix-button"> <i class="fa fa-play-circle fa-5x"></i> </div> -->
+		      <button type="button" class="btn btn-primary btn-lg" id="btnPickBeat" onclick="CrossfadeSample.setBeat(this)"> <span class="glyphicon glyphicon-random" style="padding-right: 10px"></span> Pick a beat</button>
           <p class="mix-info"> </p>
+
         </div>
-
-		<!-- <p><input type="button" onclick="CrossfadeSample.toggle();" value="Play/Pause"/> -->
-
-		</div>
-        <!-- ><div id="slider"></div> -->
-
-      </div>
-
+		  </div>
 
       <div class="stage">
 
         <div class="mix-record">
           <span class="glyphicon glyphicon-record"></span>
-
         </div>
 
-        <div>
+        <div class="mix-guide">
 
           <div style="float:left; padding-left: 50px">
           <span class="glyphicon glyphicon-arrow-left"></span> CLASSICAL </div>
 
           <div style="float:right; padding-right: 50px">
           BEAT <span class="glyphicon glyphicon-arrow-right"></span> </div>
-
         </div>
 
-		<form style="float:center;padding:6rem">
-		<input type="range" min="0" max="100" value="0" oninput="CrossfadeSample.crossfade(this);" /> </p>
-		</form>
+    		<form style="float:center;padding:6rem">
+    		<input type="range" min="0" max="100" value="0" oninput="CrossfadeSample.crossfade(this);" />
+    		</form>
 
-         <div class="mix-result" style="vertical-align: top">
+        <div class="mix-result" style="vertical-align: top">
 
           <div class="mix-button"> <i class="fa fa-play-circle fa-5x"></i> </div>
           <div class="mix-info" id="resultInfo"> </div>
-		  
-		  
 
-		  <a href="https://twitter.com/share" class="twitter-share-button" data-text="Meet Classical Indian Music -" data-hashtags="cfihackaton">Tweet</a>
-		  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-		  <div class="fb-share-button" data-href="http://54.82.150.90/indianMusicArchive/" data-type="button_count"></div>
+          <!-- TWITTER SHARE -->
+  		    <a href="https://twitter.com/share" class="twitter-share-button" data-text="Meet Classical Indian Music -" data-hashtags="cfihackaton">Tweet</a>
+  		    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+          <!-- FACEBOOK SHARE -->
+  		    <div class="fb-share-button" data-href="http://54.82.150.90/indianMusicArchive/" data-type="button_count"></div>
+
         </div>
-
       </div>
-
     </div>
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -266,19 +257,18 @@
     <script src="vendor/slider/js/bootstrap-slider.js"></script>
 
     <script src="js/mix.js"></script>
-	<script src="js/sound.js"></script>
-	<script src="js/buffer-loader.js"></script>
-	<script src="js/volume-sample.js"></script>
-	<script src="js/rhythm-sample.js"></script>
-	<!--  <script src="js/crossfade-sample.js"></script> -->
-	<script src="js/crossfade-playlist-sample.js"></script>
-	<script src="js/filter-sample.js"></script>
-	<script src="js/init.js"></script>
-	<script src="js/recorder.js"></script>
-	<script src="js/recorderWorker.js"></script>
+    <script src="js/init.js"></script>
 
+  	<script src="js/sound.js"></script>
 
-
+  	<script src="js/buffer-loader.js"></script>
+  	<script src="js/volume-sample.js"></script>
+  	<script src="js/rhythm-sample.js"></script>
+  	<!--  <script src="js/crossfade-sample.js"></script> -->
+  	<script src="js/crossfade-playlist-sample.js"></script>
+  	<script src="js/filter-sample.js"></script>
+  	<script src="js/recorder.js"></script>
+  	<script src="js/recorderWorker.js"></script>
 
   </body>
 </html>
