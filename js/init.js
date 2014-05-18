@@ -1,6 +1,7 @@
 // Keep track of all loaded buffers.
 var CLASSICAL_BUFFERS = [];
 var BEAT_BUFFERS = [];
+
 // Page-wide audio context.
 var context = null;
 
@@ -31,51 +32,60 @@ var CLASSICAL_BUFFERS_TO_LOAD = [
 	'sounds/M S Subbulakshmi - Yaro Ivar Yaro - Bhairavi.wav',
 	'sounds/M. Ramachandra Rao of Bangalore - Carnatic.wav',
 	'sounds/Moghubai Kurdikar.wav',
-	'sounds/Sawai Gandharva - bin dekhe pade nahi chain.wav' 
+	'sounds/Sawai Gandharva - bin dekhe pade nahi chain.wav'
 ];
 
-// Loads all sound samples into the buffers object.
+// loads all sound samples into the buffers object.
+// TODO: needs to be done only when required.
+
 function loadBuffers() {
   // Array-ify
   var names = [];
   var paths = [];
-  
+
   for (var i = 0; i < CLASSICAL_BUFFERS_TO_LOAD.length; i++) {
     var path = CLASSICAL_BUFFERS_TO_LOAD[i];
     names.push(i);
     paths.push(path);
   }
-  
+
   bufferLoader = new BufferLoader(context, paths, function(bufferList) {
-    for (var i = 0; i < bufferList.length; i++) {
-      var buffer = bufferList[i];
-      // var name = names[i];
-      CLASSICAL_BUFFERS[i] = buffer;
-    }
+
+    console.log("Classical: Loading Complete");
+    CLASSICAL_BUFFERS = bufferList;
+
+    // for (var i = 0; i < bufferList.length; i++) {
+
+    //   var buffer = bufferList[i];
+    //   CLASSICAL_BUFFERS[i] = buffer;
+    // }
   });
-  
+
   bufferLoader.load();
-  
+
   var names = [];
   var paths = [];
-  
+
   for (var i = 0; i < BEAT_BUFFERS_TO_LOAD.length; i++) {
     var path = BEAT_BUFFERS_TO_LOAD[i];
     names.push(i);
     paths.push(path);
   }
-  
+
   bufferLoader = new BufferLoader(context, paths, function(bufferList) {
-    for (var i = 0; i < bufferList.length; i++) {
-      var buffer = bufferList[i];
-      // var name = names[i];
-      BEAT_BUFFERS[i] = buffer;
-    }
+
+    console.log("Beats: Loading Complete");
+    BEAT_BUFFERS = bufferList;
+
+    // for (var i = 0; i < bufferList.length; i++) {
+    //   var buffer = bufferList[i];
+    //   BEAT_BUFFERS[i] = buffer;
+    // }
   });
-  
+
   bufferLoader.load();
-  
-  
+
+  // if()
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -85,7 +95,9 @@ document.addEventListener('DOMContentLoaded', function() {
     context = new AudioContext();
   }
   catch(e) {
+
     alert("Web Audio API is not supported in this browser");
   }
+
   loadBuffers();
 });

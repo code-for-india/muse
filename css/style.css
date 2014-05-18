@@ -1,8 +1,18 @@
+/*body {
+
+	padding: 0 !important;
+}*/
+
 .container {
 
 	text-align: center;
 	margin: 0px auto;
 
+}
+
+.logo {
+
+	font-size: 4em;
 }
 
 .muse-search,
@@ -82,8 +92,7 @@
 	width: 30%;
 	margin: 10px;
 
-	border: 1px solid black;
-	border-radius: 10px;
+	/*border: 1px solid black;*/
 
 	text-align: center;
 
@@ -93,10 +102,16 @@
 	}
 }
 
+.mix-guide {
+
+	display: none;
+}
+
 .mix-result {
 
 	margin-left: -5em;
 	opacity: 0;
+	display: none;
 }
 
 .mix-result p {
@@ -105,10 +120,19 @@
 	width: 150%;
 }
 
-.mix-button, .mix-result > .mix-info {
+.mix-button {
 
 	display: inline-block;
-	/*float: left;*/
+	vertical-align: middle;
+
+	margin: 20px 5px 5px;
+	padding: 5px;
+}
+
+.mix-result > .mix-info {
+
+	display: inline-block;
+	vertical-align: middle;
 
 	margin: 5px;
 	padding: 5px;
@@ -158,4 +182,10 @@
 .mix-button > span {
 
 	font-size: 4em;
+}
+
+.mix-share {
+
+	display: inline-block;
+	margin: 45px 20px;
 }

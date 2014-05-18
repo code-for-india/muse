@@ -29,6 +29,7 @@ BufferLoader.prototype.loadBuffer = function(url, index) {
       },
       function(error) {
         console.error('decodeAudioData error', error);
+
       }
     );
   }
@@ -44,4 +45,3 @@ BufferLoader.prototype.load = function() {
   for (var i = 0; i < this.urlList.length; ++i)
   this.loadBuffer(this.urlList[i], i);
 }
-

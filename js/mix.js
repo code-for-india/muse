@@ -1,39 +1,69 @@
 $('document').ready(function() {
 
-	$( "#slider" ).slider();
-
-	$( '.slider' ).css('display', 'block');
-	$( '.slider' ).css('width', '50%');
-	$( '.slider' ).css('margin', '0px auto');
-	$( '.slider' ).css('margin-top', '20px');
-
 	var button_record;
 	var blink;
 
-	$( "#input-classical" ).autocomplete({
+	var classical_autocomplete = [];
+	var beat_autocomplete = [];
 
-		source: CLASSICAL_BUFFERS_TO_LOAD,
+	for (var i = CLASSICAL_BUFFERS_TO_LOAD.length - 1; i >= 0; i--) {
+
+		var v = CLASSICAL_BUFFERS_TO_LOAD[i]
+		var l = v.substring( v.lastIndexOf('/')+1, v.lastIndexOf('.wav') );
+
+		classical_autocomplete.push({
+			value: v,
+			label: l,
+		});
+	};
+
+	console.log(classical_autocomplete);
+
+	for (var i = BEAT_BUFFERS_TO_LOAD.length - 1; i >= 0; i--) {
+
+		var v = BEAT_BUFFERS_TO_LOAD[i]
+		var l = v.substring( v.lastIndexOf('/')+1, v.lastIndexOf('.wav') );
+
+		beat_autocomplete.push({
+			value: v,
+			label: l,
+		});
+	};
+
+	console.log(beat_autocomplete);
+
+	$("#input-classical").autocomplete({
+
+		source: classical_autocomplete,
 		select: function(e, ui) {
 			var n = $.inArray(ui.item.value, CLASSICAL_BUFFERS_TO_LOAD);
-			CrossfadeSample.setStrictClassical(document.getElementById('btnPickClassical'), n);
+			Crossfade.setClassical( n );
 		}
 	});
 
 	$( "#input-beat" ).autocomplete({
 
-		source: BEAT_BUFFERS_TO_LOAD,
+		source: beat_autocomplete,
 		select: function(e, ui) {
 
 			var n = $.inArray(ui.item.value, BEAT_BUFFERS_TO_LOAD);
-			console.log(n);
-
-			CrossfadeSample.setStrictBeat(document.getElementById('btnPickBeat'), n);
+			Crossfade.setBeat( n );
 		}
 	});
 
 	$( "#input-beat" ).autocomplete({
 	      source: BEAT_BUFFERS_TO_LOAD
 		});
+
+	$( "#btnPickClassical" ).on("click", "", function() {
+
+		Crossfade.setClassical( -1 );
+	});
+
+	$( "#btnPickBeat" ).on("click", "", function() {
+
+		Crossfade.setBeat( -1 );
+	});
 
 	$(".mix-add").on("click", "span", function() {
 
@@ -74,15 +104,11 @@ $('document').ready(function() {
 
 			button_record = "";
 
-			// upload result to soundcloud
-
-			$( ".mix-result" ).css( "opacity", "1" );
+			$(".mix-result").toggle();
+			$(".mix-result").css( "opacity", "1" );
 
 			var r1 = $('#btnPickClassical').next().text();
 			var r2 = $('#btnPickBeat').next().text();
-
-			console.log(r1);
-			console.log(r2);
 
 			$("#resultInfo").text("Remix - " + r1 + " ft. " + r2);
 
@@ -106,14 +132,16 @@ $('document').ready(function() {
 			}, 500);
 		}
 
-		CrossfadeSample.toggle();
+		Crossfade.toggle();
+		$(".mix-guide").toggle("fast");
+
 	});
 
 	$('.mix-result').on("click", ".mix-button", function() {
 
-		CrossfadeSample.toggle();
+		Crossfade.toggle();
 		setTimeout(function() {
-				CrossfadeSample.hackingcrossfade(50);
+				Crossfade.hackingcrossfade(50);
 		}, 4000);
 
 	});

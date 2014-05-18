@@ -1,146 +1,117 @@
 
-var CrossfadeSample = {playing:false};
-var RecorderGlobal;
+var Crossfade = {
 
-var index_classical;
-var index_beat;
+	playing: false,
 
-CrossfadeSample.setStrictClassical = function(el, n) {
+	index_classical: null,
+	index_beat: null,
 
-  console.log(n);
+  	el_ClassicalName: $('#btnPickClassical').next(),
+  	el_BeatName: $('#btnPickBeat').next(),
 
-  index_classical = n;
-  // index_classical = 1;
+  	getSongTitle: function (fileName) {
 
-  console.log($(el).next());
-  console.log(CLASSICAL_BUFFERS_TO_LOAD[index_classical]);
+    	var s = fileName.lastIndexOf('/')
+	    var e = fileName.lastIndexOf('.wav');
 
-  var name = CLASSICAL_BUFFERS_TO_LOAD[index_classical];
+    	return fileName.substring( s+1, e );
+  	}
+};
 
-  $(el).next().html(name.substring(name.indexOf('/')+1, name.indexOf('.')));
+Crossfade.setClassical = function( i ) {
+
+  this.index_classical = (i == -1)
+    ? Math.floor(Math.random() * 9) + 1 : i;
+
+	var name = CLASSICAL_BUFFERS_TO_LOAD[this.index_classical];
+
+	$(this.el_ClassicalName).html( this.getSongTitle(name) );
 }
 
-CrossfadeSample.setClassical = function(el) {
+Crossfade.setBeat = function( i ) {
 
-	index_classical = Math.floor(Math.random() * 9) + 1;
-	// index_classical = 1;
+	this.index_beat = (i == -1)
+    ? Math.floor(Math.random() * 9) + 1 : i;
 
-	console.log($(el).next());
-	console.log(CLASSICAL_BUFFERS_TO_LOAD[index_classical]);
+	var name = BEAT_BUFFERS_TO_LOAD[this.index_beat];
 
-	var name = CLASSICAL_BUFFERS_TO_LOAD[index_classical];
-
-	$(el).next().html(name.substring(name.indexOf('/')+1, name.indexOf('.')));
+	$(this.el_BeatName).html( this.getSongTitle(name) );
 }
 
-CrossfadeSample.setBeat = function(el) {
+Crossfade.play = function() {
 
-	index_beat = Math.floor(Math.random() * 9) + 1;
+	if (!this.index_classical) {
 
-	console.log($(el).next());
-	console.log(BEAT_BUFFERS_TO_LOAD[index_beat]);
+		Crossfade.setClassical(-1);
+		Crossfade.setBeat(-1);
+	}
 
-	var name = BEAT_BUFFERS_TO_LOAD[index_beat];
+	this.ctl1 = createSource(CLASSICAL_BUFFERS[this.index_classical]);
+	this.ctl2 = createSource(BEAT_BUFFERS[this.index_beat]);
 
-	$(el).next().html(name.substring(name.indexOf('/')+1, name.indexOf('.')));
-}
-
-CrossfadeSample.setStrictBeat = function(el, n) {
-
-  index_beat = n;
-
-  console.log($(el).next());
-  console.log(BEAT_BUFFERS_TO_LOAD[index_beat]);
-
-  var name = BEAT_BUFFERS_TO_LOAD[index_beat];
-
-  $(el).next().html(name.substring(name.indexOf('/')+1, name.indexOf('.')));
-}
-
-
-CrossfadeSample.play = function() {
-  // Create two sources.
-  //this.ctl1 = createSource(BUFFERS.drums);
-  //this.ctl2 = createSource(BUFFERS.organ);
-
-  if(typeof index_classical == "undefined") {
-
-	  CrossfadeSample.setClassical(document.getElementById('btnPickClassical'));
-	  CrossfadeSample.setBeat(document.getElementById('btnPickBeat'));
-  }
-
-  this.ctl1 = createSource(CLASSICAL_BUFFERS[index_classical]);
-  this.ctl2 = createSource(BEAT_BUFFERS[index_beat]);
-
-  // Mute the second source.
+  // mute the beats for starters
   this.ctl2.gainNode.gain.value = 0;
-  // Start playback in a loop
-  if (!this.ctl1.source.start) {
-    this.ctl1.source.noteOn(0);
-    this.ctl2.source.noteOn(0);
-  } else {
-    this.ctl1.source.start(0);
-    this.ctl2.source.start(0);
-  }
 
-  RecorderGlobal = new Recorder(this.ctl2.source);
-  RecorderGlobal.record();
+  // playback in a loop
+  if (!this.ctl1.source.start) {
+  	this.ctl1.source.noteOn(0);
+  	this.ctl2.source.noteOn(0);
+  } else {
+  	this.ctl1.source.start(0);
+  	this.ctl2.source.start(0);
+  }
 
   function createSource(buffer) {
-    var source = context.createBufferSource();
-    var gainNode = context.createGain ? context.createGain() : context.createGainNode();
-    source.buffer = buffer;
-    // Turn on looping
-    source.loop = true;
-    // Connect source to gain.
-    source.connect(gainNode);
+  	var source = context.createBufferSource();
+  	var gainNode = context.createGain ? context.createGain() : context.createGainNode();
+  	source.buffer = buffer;
+	// Turn on looping
+	source.loop = true;
+	// Connect source to gain.
+	source.connect(gainNode);
 
-    // Connect gain to destination.
-    gainNode.connect(context.destination);
+	// Connect gain to destination.
+	gainNode.connect(context.destination);
 
-    return {
-      source: source,
-      gainNode: gainNode
-    };
-  }
+	return {
+		source: source,
+		gainNode: gainNode
+	};
+}
 };
 
 
-CrossfadeSample.stop = function() {
-  if (!this.ctl1.source.stop) {
-    this.ctl1.source.noteOff(0);
-    this.ctl2.source.noteOff(0);
-  } else {
-    this.ctl1.source.stop(0);
-    this.ctl2.source.stop(0);
-	//RecorderGlobal.clear();
-	RecorderGlobal.stop();
-	createDownloadLink();
+Crossfade.stop = function() {
+	if (!this.ctl1.source.stop) {
+		this.ctl1.source.noteOff(0);
+		this.ctl2.source.noteOff(0);
+	} else {
+		this.ctl1.source.stop(0);
+		this.ctl2.source.stop(0);
   }
 };
 
 function createDownloadLink() {
-    RecorderGlobal && RecorderGlobal.exportWAV(function(blob) {
-      var url = URL.createObjectURL(blob);
-      var li = document.createElement('li');
-      var au = document.createElement('audio');
-      var hf = document.createElement('a');
+	RecorderGlobal && RecorderGlobal.exportWAV(function(blob) {
+		var url = URL.createObjectURL(blob);
+		var li = document.createElement('li');
+		var au = document.createElement('audio');
+		var hf = document.createElement('a');
 
-      au.controls = true;
-      au.src = url;
-      hf.href = url;
-      hf.download = new Date().toISOString() + '.wav';
-      hf.innerHTML = hf.download;
-      li.appendChild(au);
-      li.appendChild(hf);
-	  // $('.stage').append(li);
-      //recordingslist.appendChild(li);
-    });
-  }
+		au.controls = true;
+		au.src = url;
+		hf.href = url;
+		hf.download = new Date().toISOString() + '.wav';
+		hf.innerHTML = hf.download;
+		li.appendChild(au);
+		li.appendChild(hf);
+});
+}
 
 // Fades between 0 (all source 1) and 1 (all source 2)
-CrossfadeSample.crossfade = function(element) {
-  var x = parseInt(element.value) / parseInt(element.max);
+Crossfade.crossfade = function(element) {
+
+	var x = parseInt(element.value) / parseInt(element.max);
   // Use an equal-power crossfading curve:
   var gain1 = Math.cos(x * 0.5*Math.PI);
   var gain2 = Math.cos((1.0 - x) * 0.5*Math.PI);
@@ -149,8 +120,10 @@ CrossfadeSample.crossfade = function(element) {
 
 };
 
-CrossfadeSample.hackingcrossfade = function(n) {
-  var x = n / 100;
+// this is a hack. calling crossfade as required
+Crossfade.hackingcrossfade = function(n) {
+
+	var x = n / 100;
   // Use an equal-power crossfading curve:
   var gain1 = Math.cos(x * 0.5*Math.PI);
   var gain2 = Math.cos((1.0 - x) * 0.5*Math.PI);
@@ -159,7 +132,8 @@ CrossfadeSample.hackingcrossfade = function(n) {
 
 };
 
-CrossfadeSample.toggle = function() {
-  this.playing ? this.stop() : this.play();
-  this.playing = !this.playing;
+Crossfade.toggle = function() {
+
+	this.playing ? this.stop() : this.play();
+	this.playing = !this.playing;
 };
