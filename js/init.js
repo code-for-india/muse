@@ -1,11 +1,14 @@
-// Keep track of all loaded buffers.
+// sourced from : http://www.html5rocks.com/en/tutorials/webaudio/intro/
+
+// create global buffer variables to store sounds
+
+var context = null;
+
 var CLASSICAL_BUFFERS = [];
 var BEAT_BUFFERS = [];
 
-// Page-wide audio context.
-var context = null;
+// list of best to load
 
-// An object to track the buffers to load {name: path}
 var BEAT_BUFFERS_TO_LOAD = [
   'sounds/90_dub_beat.wav',
   'sounds/95bpm_Loop01.wav',
@@ -18,8 +21,9 @@ var BEAT_BUFFERS_TO_LOAD = [
   'sounds/multibeat2.wav',
   'sounds/Musical_beat.wav',
   'sounds/perforated_beat.wav'
-  //carnatic2: 'http://api.soundcloud.com/tracks/6981096/stream?client_id=90a62526f8faf6afefa28fcc99ec3b35'
   ];
+
+// list of classicals to load
 
 var CLASSICAL_BUFFERS_TO_LOAD = [
 	'sounds/abdul reheman kachwala - sab ka ek hi palanhar.wav',
@@ -51,14 +55,9 @@ function loadBuffers() {
 
   bufferLoader = new BufferLoader(context, paths, function(bufferList) {
 
-    console.log("Classical: Loading Complete");
+    // console.log("Classical: Loading Complete");
     CLASSICAL_BUFFERS = bufferList;
 
-    // for (var i = 0; i < bufferList.length; i++) {
-
-    //   var buffer = bufferList[i];
-    //   CLASSICAL_BUFFERS[i] = buffer;
-    // }
   });
 
   bufferLoader.load();
@@ -74,30 +73,29 @@ function loadBuffers() {
 
   bufferLoader = new BufferLoader(context, paths, function(bufferList) {
 
-    console.log("Beats: Loading Complete");
+    // console.log("Beats: Loading Complete");
     BEAT_BUFFERS = bufferList;
 
-    // for (var i = 0; i < bufferList.length; i++) {
-    //   var buffer = bufferList[i];
-    //   BEAT_BUFFERS[i] = buffer;
-    // }
   });
 
   bufferLoader.load();
 
-  // if()
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+
+  // check if the browser supports Web Audio API
+
   try {
-    // Fix up prefixing
+
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     context = new AudioContext();
-  }
-  catch(e) {
+
+  }  catch(e) {
 
     alert("Web Audio API is not supported in this browser");
   }
 
   loadBuffers();
+
 });
