@@ -1,0 +1,34 @@
+[
+
+	// buttons showing up
+
+	"Pick Classical button should load and be visible",
+	"Pick Beat button should load and be visible",
+	"Record button should load and be visible",
+
+	// search works
+
+	"Searching Classical for S gives some results",
+	"Searching Beats for 85 gives some results",
+
+	// pick buttons working
+
+	"Clicking Pick Classical must display the choosen song",
+	"Clicking Pick Beat must display the choosen song",
+	"Clicking Pick Classical repeatedly should display different songs",
+	"Clicking Pick Beat repeatedly should display different beat",
+
+	// record button working
+
+	"Clicking Record must start playing music",
+	"Clicking Record must stop playing music if it is already playing",
+	"Clicking Record when no songs are selected must randomly choose songs",
+
+	// sharing options working
+
+	"Clicking on play should start playing the song",
+	"Clicking on play must call crossfade",
+	"Tweeting should open up with a custom URL",
+	"Facebook Share should open up with a custom URL"
+
+]
