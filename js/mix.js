@@ -1,10 +1,15 @@
 $('document').ready(function() {
 
-	var button_record;
+	var button_record = $(".mix-record"); // TODO: Find where this is used
 	var blink;
 
 	var classical_autocomplete = [];
 	var beat_autocomplete = [];
+
+	$mixResult = $('.mix-result');
+
+	// generating value and label objects for autocomplete
+	// TODO: move this autocomplete info code online to the API
 
 	for (var i = CLASSICAL_BUFFERS_TO_LOAD.length - 1; i >= 0; i--) {
 
@@ -17,8 +22,6 @@ $('document').ready(function() {
 		});
 	};
 
-	console.log(classical_autocomplete);
-
 	for (var i = BEAT_BUFFERS_TO_LOAD.length - 1; i >= 0; i--) {
 
 		var v = BEAT_BUFFERS_TO_LOAD[i]
@@ -30,7 +33,7 @@ $('document').ready(function() {
 		});
 	};
 
-	console.log(beat_autocomplete);
+	// code to perform autocomplete on two inputs: classical, and beat
 
 	$("#input-classical").autocomplete({
 
@@ -51,46 +54,19 @@ $('document').ready(function() {
 		}
 	});
 
-	$( "#input-beat" ).autocomplete({
-	      source: BEAT_BUFFERS_TO_LOAD
-		});
+	// ui event delegations to pick random classical and beat
 
 	$( "#btnPickClassical" ).on("click", "", function() {
 
-		Crossfade.setClassical( -1 );
+		Crossfade.setClassical(-1);
 	});
 
 	$( "#btnPickBeat" ).on("click", "", function() {
 
-		Crossfade.setBeat( -1 );
+		Crossfade.setBeat(-1);
 	});
 
-	$(".mix-add").on("click", "span", function() {
-
-		// if ($(this).parent().hasClass("disabled"))
-		// 	return;
-
-		var mix = document.createElement( "li" );
-		$(mix).addClass("mix");
-
-		var mix_source = document.createElement( "div" );
-		$(mix_source).addClass("mix_source");
-
- 		var mix_button = document.createElement( "div" );
- 		$(mix_button).addClass("mix_button");
- 		$(mix_button).html("<span class=\"glyphicon glyphicon-play\"></span>");
-
-		var mix_info = document.createElement( "div" );
-		$(mix_info).addClass("mix_info");
-		$(mix_info).html("<p> Vande Mataram by A.R.Rahman </p>");
-
-		$(mix).append(mix_source);
-		$(mix).append(mix_button);
-		$(mix).append(mix_info);
-
-		$(".mixes").append('div').listview("refresh");
-	});
-
+	// ui event delegation to start and stop the  mix
 
 	$(".mix-record").on("click", "span", function() {
 
@@ -98,28 +74,24 @@ $('document').ready(function() {
 
 			$(this).removeClass("recording");
 
-			clearInterval(blink)
-
-			$(button_record).css("color", "#000");
-
-			button_record = "";
-
-			$(".mix-result").toggle();
-			$(".mix-result").css( "opacity", "1" );
+			clearInterval(blink);
+			$(button_record).css("color", "#FFF");
 
 			var r1 = $('#btnPickClassical').next().text();
 			var r2 = $('#btnPickBeat').next().text();
 
 			$("#resultInfo").text("Remix - " + r1 + " ft. " + r2);
 
+			$mixResult.show();
+			$(".mix-result").css( "opacity", "1" );
 
 		} else {
 
 			$(this).addClass("recording");
 
-			$( ".mix-result" ).css( "opacity", "0" );
-
 			button_record = $(this);
+
+			// start the blinking
 
 			blink = setInterval( function() {
 
@@ -130,20 +102,29 @@ $('document').ready(function() {
 				}, 100);
 
 			}, 500);
+
+			// hide the recorded element
+
+			$mixResult.hide();
+			$(".mix-result").css( "opacity", "0" );
 		}
 
 		Crossfade.toggle();
-		$(".mix-guide").toggle("fast");
 
+		// show and hide mix value
+
+		$(".mix-guide input").val(0);
+		$(".mix-guide").toggle("fast");
 	});
+
+	// ui event delegation to play the saved mix
 
 	$('.mix-result').on("click", ".mix-button", function() {
 
 		Crossfade.toggle();
 		setTimeout(function() {
-				Crossfade.hackingcrossfade(50);
+				Crossfade.crossfade(50);
 		}, 4000);
-
 	});
 
 });
