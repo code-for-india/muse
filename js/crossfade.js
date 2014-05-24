@@ -5,8 +5,8 @@ var Crossfade = {
 	index_classical: null,
 	index_beat: null,
 
-  	el_ClassicalName: $('#btnPickClassical').next(),
-  	el_BeatName: $('#btnPickBeat').next(),
+  	$nameClassical: $('#btnPickClassical').next(),
+  	$nameBeat: $('#btnPickBeat').next(),
 
   	// helper function to strip song title from the filename
 
@@ -49,7 +49,7 @@ Crossfade.setClassical = function( i ) {
 
 	var name = CLASSICAL_BUFFERS_TO_LOAD[this.index_classical];
 
-	$(this.el_ClassicalName).html( this.getSongTitle(name) );
+	this.$nameClassical.html( this.getSongTitle(name) );
 }
 
 Crossfade.setBeat = function( i ) {
@@ -59,7 +59,7 @@ Crossfade.setBeat = function( i ) {
 
 	var name = BEAT_BUFFERS_TO_LOAD[this.index_beat];
 
-	$(this.el_BeatName).html( this.getSongTitle(name) );
+	this.$nameBeat.html( this.getSongTitle(name) );
 }
 
 Crossfade.play = function() {

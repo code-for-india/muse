@@ -1,12 +1,30 @@
 $('document').ready(function() {
 
-	var button_record = $(".mix-record"); // TODO: Find where this is used
+	// cache all required elements from DOM
+
+	var $divMixer = $('.mix-guide');
+  	var $divResult = $('.mix-result');
+
+	var $inputClassical = $('#input-classical');
+	var $inputBeat = $('#input-beat');
+
+	var $btnLivePlay = $('.mix-record span');
+	var $btnRePlay = $('.mix-button');
+	var $btnPickClassical = $('#btnPickClassical');
+	var $btnPickBeat = $('#btnPickBeat');
+
+	var $nameClassical = $btnPickClassical.next();
+  	var $nameBeat = $btnPickBeat.next();
+  	var $nameResult = $("#resultInfo");
+
+  	// blinking setInterval variable
+
 	var blink;
+
+	// arrays to store elements for autocomplete
 
 	var classical_autocomplete = [];
 	var beat_autocomplete = [];
-
-	$mixResult = $('.mix-result');
 
 	// generating value and label objects for autocomplete
 	// TODO: move this autocomplete info code online to the API
@@ -35,7 +53,7 @@ $('document').ready(function() {
 
 	// code to perform autocomplete on two inputs: classical, and beat
 
-	$("#input-classical").autocomplete({
+	$inputClassical.autocomplete({
 
 		source: classical_autocomplete,
 		select: function(e, ui) {
@@ -44,7 +62,7 @@ $('document').ready(function() {
 		}
 	});
 
-	$( "#input-beat" ).autocomplete({
+	$inputBeat.autocomplete({
 
 		source: beat_autocomplete,
 		select: function(e, ui) {
@@ -56,70 +74,70 @@ $('document').ready(function() {
 
 	// ui event delegations to pick random classical and beat
 
-	$( "#btnPickClassical" ).on("click", "", function() {
+	$btnPickClassical.on('click', '', function() {
 
 		Crossfade.setClassical(-1);
 	});
 
-	$( "#btnPickBeat" ).on("click", "", function() {
+	$btnPickBeat.on('click', '', function() {
 
 		Crossfade.setBeat(-1);
 	});
 
-	// ui event delegation to start and stop the  mix
+	// ui event delegation to live play the mix
 
-	$(".mix-record").on("click", "span", function() {
+	$btnLivePlay.on("click", '', function() {
 
 		if ($(this).hasClass("recording")) {
 
 			$(this).removeClass("recording");
 
 			clearInterval(blink);
-			$(button_record).css("color", "#FFF");
+			$btnLivePlay.css("color", "#FFF");
 
-			var r1 = $('#btnPickClassical').next().text();
-			var r2 = $('#btnPickBeat').next().text();
+			// TODO: get this from Crossfade and not from display
 
-			$("#resultInfo").text("Remix - " + r1 + " ft. " + r2);
+			var r1 = $nameClassical.text();
+			var r2 = $nameBeat.text();
 
-			$mixResult.show();
-			$(".mix-result").css( "opacity", "1" );
+			$nameResult.text("Remix - " + r1 + " ft. " + r2);
+
+			$divResult.show();
+			$divResult.css( "opacity", "1" );
 
 		} else {
 
 			$(this).addClass("recording");
 
-			button_record = $(this);
-
 			// start the blinking
 
 			blink = setInterval( function() {
 
-				$(button_record).css("color", "#FFF");
+				$btnLivePlay.css("color", "#FFF");
 
 				setTimeout( function (){
-					$(button_record).css("color", "#A00000");
+					$btnLivePlay.css("color", "#A00000");
 				}, 100);
 
 			}, 500);
 
 			// hide the recorded element
 
-			$mixResult.hide();
-			$(".mix-result").css( "opacity", "0" );
+			$divResult.hide();
+			$divResult.css( "opacity", "0" );
 		}
 
 		Crossfade.toggle();
 
 		// show and hide mix value
 
-		$(".mix-guide input").val(0);
-		$(".mix-guide").toggle("fast");
+		$divMixer.find('input').val(0);
+		$divMixer.toggle("fast");
 	});
 
-	// ui event delegation to play the saved mix
+	// ui event delegation to replay the mix
 
-	$('.mix-result').on("click", ".mix-button", function() {
+	$btnRePlay.on("click", '', function() {
 
 		Crossfade.toggle();
 		setTimeout(function() {

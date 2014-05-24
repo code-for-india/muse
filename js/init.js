@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   }  catch(e) {
 
-    alert("Web Audio API is not supported in this browser");
+    alert("Web Audio API is not supported in this browser. Muse may not function.");
   }
 
   loadBuffers();
