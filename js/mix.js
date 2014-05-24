@@ -17,9 +17,13 @@ $('document').ready(function() {
   	var $nameBeat = $btnPickBeat.next();
   	var $nameResult = $("#resultInfo");
 
-  	// blinking setInterval variable
+  	// playing and blinking setInterval variables
 
-	var blink;
+	var playing;
+	var blinking;
+
+	var LiveCrossfade = new Crossfade();
+	var ReCrossfade = new Crossfade();
 
 	// arrays to store elements for autocomplete
 
@@ -58,7 +62,7 @@ $('document').ready(function() {
 		source: classical_autocomplete,
 		select: function(e, ui) {
 			var n = $.inArray(ui.item.value, CLASSICAL_BUFFERS_TO_LOAD);
-			Crossfade.setClassical( n );
+			LiveCrossfade.setClassical(n);
 		}
 	});
 
@@ -68,7 +72,7 @@ $('document').ready(function() {
 		select: function(e, ui) {
 
 			var n = $.inArray(ui.item.value, BEAT_BUFFERS_TO_LOAD);
-			Crossfade.setBeat( n );
+			LiveCrossfade.setBeat( n );
 		}
 	});
 
@@ -76,42 +80,62 @@ $('document').ready(function() {
 
 	$btnPickClassical.on('click', '', function() {
 
-		Crossfade.setClassical(-1);
+		LiveCrossfade.setClassical(-1);
 	});
 
 	$btnPickBeat.on('click', '', function() {
 
-		Crossfade.setBeat(-1);
+		LiveCrossfade.setBeat(-1);
 	});
 
 	// ui event delegation to live play the mix
 
 	$btnLivePlay.on("click", '', function() {
 
-		if ($(this).hasClass("recording")) {
+		// stop ReCrossfade if it was playing
 
-			$(this).removeClass("recording");
+		ReCrossfade.stop();
 
-			clearInterval(blink);
-			$btnLivePlay.css("color", "#FFF");
+		// show and hide mix value
 
-			// TODO: get this from Crossfade and not from display
+		$divMixer.find('input').val(0);
+		$divMixer.toggle("fast");
 
-			var r1 = $nameClassical.text();
-			var r2 = $nameBeat.text();
+		console.log(playing);
 
-			$nameResult.text("Remix - " + r1 + " ft. " + r2);
+		if (LiveCrossfade.isPlaying()) {
+
+			// stop the music
+
+			LiveCrossfade.stop();
+
+			// change the apperance of the button
+
+			$btnLivePlay.css('color','#FFF');
+			$btnLivePlay.css('font-size', '5em');
+
+			// stop the blinking
+
+			clearInterval(blinking);
+
+			// show the result element
 
 			$divResult.show();
 			$divResult.css( "opacity", "1" );
 
 		} else {
 
-			$(this).addClass("recording");
+			// start the mix
+
+			LiveCrossfade.play();
+
+			// change the color of the button
+
+			$btnLivePlay.css('font-size', '6em');
 
 			// start the blinking
 
-			blink = setInterval( function() {
+			blinking = setInterval( function() {
 
 				$btnLivePlay.css("color", "#FFF");
 
@@ -121,27 +145,41 @@ $('document').ready(function() {
 
 			}, 500);
 
-			// hide the recorded element
+			// hide the existing result element
 
 			$divResult.hide();
 			$divResult.css( "opacity", "0" );
+
+			// build the result element
+
+			ReCrossfade.setClassical(LiveCrossfade.getClassical());
+			ReCrossfade.setBeat(LiveCrossfade.getBeat());
+
+			var r1 = $nameClassical.text();
+			var r2 = $nameBeat.text();
+
+			$nameResult.text("Remix - " + r1 + " ft. " + r2);
+
 		}
+	});
 
-		Crossfade.toggle();
+	// ui event delegation to vary the mix
 
-		// show and hide mix value
+	$divMixer.find('input').on('change', '', function (e){
 
-		$divMixer.find('input').val(0);
-		$divMixer.toggle("fast");
+		LiveCrossfade.crossfade(e.target);
 	});
 
 	// ui event delegation to replay the mix
 
 	$btnRePlay.on("click", '', function() {
 
-		Crossfade.toggle();
+		ReCrossfade.toggle();
+
+		// TODO: match url to array from database and call crossfade accordingly
+
 		setTimeout(function() {
-				Crossfade.crossfade(50);
+				ReCrossfade.crossfade(50);
 		}, 4000);
 	});
 
