@@ -1,18 +1,10 @@
-/*body {
-
-	padding: 0 !important;
-}*/
+/* PAGE ELEMENTS */
 
 .container {
 
-	text-align: center;
 	margin: 0px auto;
+	text-align: center;
 
-}
-
-.logo {
-
-	font-size: 4em;
 }
 
 .muse-search,
@@ -23,12 +15,17 @@
 	text-align: center;
 }
 
+/* LOGO */
+
 .logo {
 
+	font-size: 4em;
 	position: relative !important;
 	left: 0px !important;
 	text-align: center !important;
 }
+
+/* SEARCH ELEMENTS */
 
 .muse-search {
 
@@ -37,17 +34,11 @@
 	margin-top: 100px;
 }
 
-.mix > .mix-info {
-	display: block !important;
+.mixes {
+
+	margin-top: 30px;
+	min-height: 200px;
 }
-
-#resultInfo {
-
-	font-size: 1.5em;
-	margin-top: 40px;
-	vertical-align: top;
-}
-
 
 #input-classical,
 #input-beat {
@@ -64,35 +55,13 @@
 
 }
 
-
-.mixes {
-
-	margin-top: 30px;
-	min-height: 200px;
-}
-
-.stage {
-
-	padding: 25px;
-}
-
-#slider {
-
-	width: 100%;
-	margin: 0px auto;
-	display: block;
-}
-
 .mix {
 
-	vertical-align: top;
-
 	display: inline-block;
+	vertical-align: top;
 
 	width: 30%;
 	margin: 10px;
-
-	/*border: 1px solid black;*/
 
 	text-align: center;
 
@@ -102,22 +71,18 @@
 	}
 }
 
+.mix > .mix-info {
+	display: block !important;
+}
+
+
+
+
+/* PLAY ELEMENTS */
+
 .mix-guide {
 
 	display: none;
-}
-
-.mix-result {
-
-	margin-left: -5em;
-	opacity: 0;
-	display: none;
-}
-
-.mix-result p {
-
-
-	width: 150%;
 }
 
 .mix-button {
@@ -127,24 +92,6 @@
 
 	margin: 20px 5px 5px;
 	padding: 5px;
-}
-
-.mix-result > .mix-info {
-
-	display: inline-block;
-	vertical-align: middle;
-
-	margin: 5px;
-	padding: 5px;
-
-}
-
-.mix-seek {
-
-	margin-top: 50px;
-
-	height: 5px;
-	background-color: black;
 }
 
 .mix-record {
@@ -163,15 +110,38 @@
 }
 
 
-.mix-add > span {
+/* REPLAY ELEMENTS */
 
-	font-size: 5em;
+.stage {
+
+	padding: 25px;
+}
+
+.mix-result {
+
+	margin-left: -5em;
+	opacity: 0;
+	display: none;
+}
+
+.mix-result p {
+
+
+	width: 150%;
 }
 
 
-.mix-button > span {
+.mix-result > .mix-info {
 
-	font-size: 4em;
+	display: inline-block;
+	vertical-align: middle;
+	vertical-align: top;
+
+	margin: 5px;
+	margin-top: 40px;
+	padding: 5px;
+
+	font-size: 1.5em;
 }
 
 .mix-share {

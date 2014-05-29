@@ -1,6 +1,11 @@
 // sourced from : http://www.html5rocks.com/en/tutorials/webaudio/intro/
 
+/*
+* BufferLoader Constructor
+*
+*/
 function BufferLoader(context, urlList, callback) {
+
   this.context = context;
   this.urlList = urlList;
   this.onload = callback;
@@ -9,6 +14,7 @@ function BufferLoader(context, urlList, callback) {
 }
 
 BufferLoader.prototype.loadBuffer = function(url, index) {
+
   // Load buffer asynchronously
   var request = new XMLHttpRequest();
   request.open("GET", url, true);

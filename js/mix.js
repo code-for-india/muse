@@ -1,5 +1,7 @@
 $('document').ready(function() {
 
+	// TODO: Namespace this. Right now.
+
 	// cache all required elements from DOM
 
 	var $divMixer = $('.mix-guide');
@@ -15,15 +17,14 @@ $('document').ready(function() {
 
 	var $nameClassical = $btnPickClassical.next();
   	var $nameBeat = $btnPickBeat.next();
-  	var $nameResult = $("#resultInfo");
+  	var $nameResult = $(".mix-info");
 
   	// playing and blinking setInterval variables
 
-	var playing;
 	var blinking;
 
-	var LiveCrossfade = new Crossfade();
-	var ReCrossfade = new Crossfade();
+	var LiveCrossfade = Crossfade();
+	var ReCrossfade = Crossfade();
 
 	// arrays to store elements for autocomplete
 
@@ -55,7 +56,7 @@ $('document').ready(function() {
 		});
 	};
 
-	// code to perform autocomplete on two inputs: classical, and beat
+	// binding autocomplete on two inputs: classical, and beat
 
 	$inputClassical.autocomplete({
 
@@ -76,7 +77,7 @@ $('document').ready(function() {
 		}
 	});
 
-	// ui event delegations to pick random classical and beat
+	// binding ui event to pick random classical and beat
 
 	$btnPickClassical.on('click', '', function() {
 
@@ -88,7 +89,7 @@ $('document').ready(function() {
 		LiveCrossfade.setBeat(-1);
 	});
 
-	// ui event delegation to live play the mix
+	// binding ui event to live play the muse
 
 	$btnLivePlay.on("click", '', function() {
 
@@ -100,8 +101,6 @@ $('document').ready(function() {
 
 		$divMixer.find('input').val(0);
 		$divMixer.toggle("fast");
-
-		console.log(playing);
 
 		if (LiveCrossfade.isPlaying()) {
 
@@ -163,14 +162,14 @@ $('document').ready(function() {
 		}
 	});
 
-	// ui event delegation to vary the mix
+	// ui event delegation to vary the muse using the slider
 
 	$divMixer.find('input').on('change', '', function (e){
 
 		LiveCrossfade.crossfade(e.target);
 	});
 
-	// ui event delegation to replay the mix
+	// ui event delegation to replay the muse
 
 	$btnRePlay.on("click", '', function() {
 
