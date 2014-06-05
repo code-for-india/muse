@@ -16,7 +16,7 @@ var Crossfade = function () {
   var $nameClassical = $('#btnPickClassical').next();
   var $nameBeat = $('#btnPickBeat').next();
 
-  // private helper function to strip song title from the filename
+  // private helper function to strip file to get song title
 
   function getSongTitle(fileName) {
 
@@ -26,7 +26,7 @@ var Crossfade = function () {
     return fileName.substring( s+1, e );
   }
 
-  // private helper function to create
+  // private factory function to create source
 
   function createSource(buffer) {
 
@@ -71,6 +71,8 @@ var Crossfade = function () {
       var name = CLASSICAL_BUFFERS_TO_LOAD[index_classical];
 
       $nameClassical.html( getSongTitle(name) );
+
+      // TODO: Load the buffer here, expect a delay
     },
 
     // getter and setter for beat index
@@ -88,6 +90,8 @@ var Crossfade = function () {
       var name = BEAT_BUFFERS_TO_LOAD[index_beat];
 
       $nameBeat.html( getSongTitle(name) );
+
+      // TODO: Load the buffer here, expect a delay
     },
 
     // play and stop functions

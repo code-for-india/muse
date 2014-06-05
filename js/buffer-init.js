@@ -91,11 +91,11 @@ document.addEventListener('DOMContentLoaded', function() {
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     context = new AudioContext();
 
+    loadBuffers();
+
   }  catch(e) {
 
-    alert("Web Audio API is not supported in this browser. Muse may not function.");
+    alert("Web Audio API is not supported in this browser. Muse will not function as expected.");
   }
-
-  loadBuffers();
 
 });
