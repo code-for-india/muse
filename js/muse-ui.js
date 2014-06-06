@@ -1,5 +1,5 @@
 (function(){
-        
+
 $('document').ready(function() {
 
 	// TODO: Namespace this. Right now.
@@ -19,7 +19,7 @@ $('document').ready(function() {
 
 	var $nameClassical = $btnPickClassical.next();
     var $nameBeat = $btnPickBeat.next();
-    var $nameResult = $(".mix-info");
+    var $nameResult = $(".mix-result .mix-info");
 
     // playing and blinking setInterval variables
 
@@ -185,5 +185,5 @@ $('document').ready(function() {
 	});
 
 });
-    
+
 })();
