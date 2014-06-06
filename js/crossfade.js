@@ -64,6 +64,8 @@ var Crossfade = function () {
     },
 
     setClassical : function(i) {
+        
+      // if i equals -1, use a random number
 
       index_classical = (i == -1)
         ? Math.floor(Math.random() * 9) + 1 : i;
@@ -83,6 +85,8 @@ var Crossfade = function () {
     },
 
     setBeat : function(i) {
+        
+      // if i equals -1, use a random number  
 
       index_beat = (i == -1)
         ? Math.floor(Math.random() * 9) + 1 : i;

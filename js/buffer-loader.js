@@ -4,7 +4,7 @@
 * BufferLoader Constructor
 *
 */
-function BufferLoader(context, urlList, callback) {
+var BufferLoader = function(context, urlList, callback) {
 
   this.context = context;
   this.urlList = urlList;

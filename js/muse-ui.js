@@ -1,3 +1,5 @@
+(function(){
+        
 $('document').ready(function() {
 
 	// TODO: Namespace this. Right now.
@@ -5,7 +7,7 @@ $('document').ready(function() {
 	// cache all required elements from DOM
 
 	var $divMixer = $('.mix-guide');
-  	var $divResult = $('.mix-result');
+    var $divResult = $('.mix-result');
 
 	var $inputClassical = $('#input-classical');
 	var $inputBeat = $('#input-beat');
@@ -16,10 +18,10 @@ $('document').ready(function() {
 	var $btnPickBeat = $('#btnPickBeat');
 
 	var $nameClassical = $btnPickClassical.next();
-  	var $nameBeat = $btnPickBeat.next();
-  	var $nameResult = $(".mix-info");
+    var $nameBeat = $btnPickBeat.next();
+    var $nameResult = $(".mix-info");
 
-  	// playing and blinking setInterval variables
+    // playing and blinking setInterval variables
 
 	var blinking;
 
@@ -183,3 +185,5 @@ $('document').ready(function() {
 	});
 
 });
+    
+})();

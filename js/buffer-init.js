@@ -4,9 +4,6 @@
 
 var context = null;
 
-var CLASSICAL_BUFFERS = [];
-var BEAT_BUFFERS = [];
-
 // list of best to load
 
 var BEAT_BUFFERS_TO_LOAD = [
@@ -43,46 +40,47 @@ var CLASSICAL_BUFFERS_TO_LOAD = [
 // TODO: needs to be done only when required.
 
 function loadBuffers() {
-  // Array-ify
-  var names = [];
-  var paths = [];
+    
+//   // Array-ify
+//   var names = [];
+//   var paths = [];
 
-  for (var i = 0; i < CLASSICAL_BUFFERS_TO_LOAD.length; i++) {
-    var path = CLASSICAL_BUFFERS_TO_LOAD[i];
-    names.push(i);
-    paths.push(path);
-  }
+//   for (var i = 0; i < CLASSICAL_BUFFERS_TO_LOAD.length; i++) {
+//     var path = CLASSICAL_BUFFERS_TO_LOAD[i];
+//     names.push(i);
+//     paths.push(path);
+//   }
 
-  bufferLoader = new BufferLoader(context, paths, function(bufferList) {
+  new BufferLoader(context, CLASSICAL_BUFFERS_TO_LOAD, function(bufferList) {
 
     // console.log("Classical: Loading Complete");
     CLASSICAL_BUFFERS = bufferList;
 
-  });
+  }).load();
 
-  bufferLoader.load();
+//   bufferLoader.load();
 
-  var names = [];
-  var paths = [];
+//   var names = [];
+//   var paths = [];
 
-  for (var i = 0; i < BEAT_BUFFERS_TO_LOAD.length; i++) {
-    var path = BEAT_BUFFERS_TO_LOAD[i];
-    names.push(i);
-    paths.push(path);
-  }
+//   for (var i = 0; i < BEAT_BUFFERS_TO_LOAD.length; i++) {
+//     var path = BEAT_BUFFERS_TO_LOAD[i];
+//     names.push(i);
+//     paths.push(path);
+//   }
 
-  bufferLoader = new BufferLoader(context, paths, function(bufferList) {
+  new BufferLoader(context, BEAT_BUFFERS_TO_LOAD, function(bufferList) {
 
     // console.log("Beats: Loading Complete");
     BEAT_BUFFERS = bufferList;
 
-  });
+  }).load();
 
-  bufferLoader.load();
+//   bufferLoader.load();
 
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+$('document').ready(function() {
 
   // check if the browser supports Web Audio API
 
